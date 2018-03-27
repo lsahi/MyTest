@@ -1,5 +1,8 @@
 package com.example.lsahi.mytest;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,28 +14,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private EditText editText;
     private ImageView imageView;
+
+    private int buttonCount=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button button1=(Button) findViewById(R.id.button_1);
+        Button button2=(Button) findViewById(R.id.button_2);
         editText =(EditText) findViewById(R.id.edit_text);
         imageView=(ImageView)findViewById(R.id.image_view);
-        button1.setOnClickListener(this);/*(new View.OnClickListener(){
+        button1.setOnClickListener(this);
+        button2.setOnClickListener(this);
+
+        /*button2.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                //
+            public void onClick(View v){
+                Intent intent=new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
             }
         });*/
     }
     @Override
-    public void onClick(View v){
-        switch(v.getId()){
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.button_1:
-                imageView.setImageResource(R.drawable.img_2);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setTitle("chenge my wife");
+                dialog.setMessage("WILL YOU REALLY CHANGE YOUR WIFE?");
+                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (buttonCount == 1) {
+                            imageView.setImageResource(R.drawable.img_1);
+                            buttonCount = 0;
+                        } else {
+                            imageView.setImageResource(R.drawable.img_2);
+                            buttonCount = 1;
+                        }
+                    }
+                });
+                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+
+                    ;
+                });
+                dialog.show();
+                //imageView.setImageResource(R.drawable.img_2);
                 break;
+
+            case R.id.button_2:
+                        Intent intent=new Intent(MainActivity.this, SecondActivity.class);
+                        startActivity(intent);
+                        break;
+
             default:
-                break;
+                break;//
         }
     }
 }

@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.example.lsahi.mytest.SecondActivity">
 
-    <Button
-        android:id="@+id/button_act2"
+    <ListView
+        android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+        android:layout_height="match_parent"
+        />
 </android.support.constraint.ConstraintLayout>

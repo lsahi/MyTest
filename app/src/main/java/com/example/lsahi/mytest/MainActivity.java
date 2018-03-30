@@ -22,11 +22,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Button button1=(Button) findViewById(R.id.button_1);
         Button button2=(Button) findViewById(R.id.button_2);
+        Button button3=(Button) findViewById(R.id.button_3);
         editText =(EditText) findViewById(R.id.edit_text);
         imageView=(ImageView)findViewById(R.id.image_view);
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);
-
+        button3.setOnClickListener(this);
         /*button2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -66,10 +67,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button_2:
-                        Intent intent=new Intent(MainActivity.this, SecondActivity.class);
-                        startActivity(intent);
+                        Intent intent2=new Intent(MainActivity.this, SecondActivity.class);
+                        startActivity(intent2);
                         break;
 
+            case R.id.button_3:
+                Intent intent3=new Intent(MainActivity.this,BroadcastActivity.class);
+                startActivity(intent3);
+                break;
             default:
                 break;//
         }

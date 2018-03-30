@@ -20,7 +20,7 @@
         android:id="@+id/button_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button1"
+        android:text="换老婆"
         android:textAllCaps="false"/>
 
     <EditText
@@ -32,7 +32,7 @@
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="396dp"
-        android:layout_height="332dp"
+        android:layout_height="275dp"
         android:src="@drawable/img_1" />
 
     <Button
@@ -41,4 +41,10 @@
         android:layout_height="wrap_content"
         android:text="Button2"
         android:textAllCaps="false" />
+    <Button
+        android:id="@+id/button_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="broadcast"
+        android:textAllCaps="false"/>
 </LinearLayout>

@@ -4,12 +4,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RecyclerViewActivity extends AppCompatActivity {
 
@@ -32,7 +34,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recycler_view);
         initFruits();
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.recycler_view);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        StaggeredGridLayoutManager layoutManager=new StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL);
+        //layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(layoutManager);
         FruitAdapter adapter=new FruitAdapter(fruitList);
         recyclerView.setAdapter(adapter);
@@ -40,11 +43,11 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
     private void initFruits(){
         for(int i=0;i<2;i++){
-            Fruit akagi=new Fruit("akagi",R.drawable.akagi);
+            Fruit akagi=new Fruit(getRandomLengthName("akagi"),R.drawable.akagi);
             fruitList.add(akagi);
             Fruit kaga=new Fruit("kaga",R.drawable.kaga);
             fruitList.add(kaga);
-            Fruit shogaku=new Fruit("shogaku",R.drawable.shogaku);
+            Fruit shogaku=new Fruit(getRandomLengthName("shogaku"),R.drawable.shogaku);
             fruitList.add(shogaku);
             Fruit zuikaku=new Fruit("zuikaku",R.drawable.zuigaku);
             fruitList.add(zuikaku);
@@ -56,7 +59,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
             fruitList.add(ikanari);
             Fruit inazuma=new Fruit("inazuma",R.drawable.inazuma);
             fruitList.add(inazuma);
-            Fruit kongo=new Fruit("kongo",R.drawable.kongo);
+            Fruit kongo=new Fruit(getRandomLengthName("kongo"),R.drawable.kongo);
             fruitList.add(kongo);
             Fruit hie=new Fruit("hie",R.drawable.hie);
             fruitList.add(hie);
@@ -72,8 +75,15 @@ public class RecyclerViewActivity extends AppCompatActivity {
             fruitList.add(eugen);
             Fruit bismarck=new Fruit("bismarck",R.drawable.bismarck);
             fruitList.add(bismarck);
-
-
         }
+    }
+    private String getRandomLengthName(String name){
+        Random random=new Random();
+        int length=random.nextInt(20)+1;
+        StringBuilder builder=new StringBuilder();
+        for(int i=0;i<length;i++){
+            builder.append(name);
+        }
+        return builder.toString();
     }
 }

@@ -68,13 +68,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button_2:
-                        Intent intent2=new Intent(MainActivity.this, RecyclerViewActivity.class);
-                        startActivity(intent2);
-                        break;
+                Intent intent2=new Intent(MainActivity.this, RecyclerViewActivity.class);
+                startActivity(intent2);
+                break;
 
             case R.id.button_3:
                 Intent intent3=new Intent(MainActivity.this,BroadcastActivity.class);
                 startActivity(intent3);
+                break;
+
+            case R.id.button_4:
+                Intent intent4=new Intent(MainActivity.this,MessageActivity.class);
+                startActivity(intent4);
                 break;
             default:
                 break;//

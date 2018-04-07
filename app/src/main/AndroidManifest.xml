@@ -25,17 +25,8 @@
             android:name=".BroadcastActivity"
             android:label="@string/title_activity_broadcast"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <receiver
-            android:name=".BootCompleteReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETE" />
-            </intent-filter>
-        </receiver>
-
-        <activity android:name=".RecyclerViewActivity"></activity>
+        <activity android:name=".RecyclerViewActivity" />
+        <activity android:name=".NotificationTest"></activity>
     </application>
 
 </manifest>

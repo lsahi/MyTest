@@ -27,10 +27,11 @@ public class BroadcastActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         intentFilter=new IntentFilter();
-        intentFilter.addAction("android.net.conn.CONNECTIVIT_CHANGE");
+        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         networkChangeReceiver=new NetworkChangeReceiver();
         registerReceiver(networkChangeReceiver,intentFilter);
 
+        //floatingActionButton
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +47,17 @@ public class BroadcastActivity extends AppCompatActivity {
         super.onDestroy();
         unregisterReceiver(networkChangeReceiver);
     }
+/*
+    class NetworkChangeReceiver extends BroadcastReceiver{
 
+        @Override
+        public void onReceive(Context context, Intent intent){
+            ConnectivityManager connectionManager=(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo=connectionManager.getActiveNetworkInfo();
+            Toast.makeText(context,"network change",Toast.LENGTH_SHORT).show();
+        }
+    }
+*/
     class NetworkChangeReceiver extends BroadcastReceiver{
 
         @Override

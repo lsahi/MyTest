@@ -32,7 +32,7 @@
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
-        android:layout_height="328dp"
+        android:layout_height="285dp"
         android:src="@drawable/img_1" />
 
     <Button
@@ -52,5 +52,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="MsgTest"
+        android:textAllCaps="false"/>
+    <Button
+        android:id="@+id/button_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notification"
         android:textAllCaps="false"/>
 </LinearLayout>

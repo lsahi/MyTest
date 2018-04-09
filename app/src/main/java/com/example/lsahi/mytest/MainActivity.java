@@ -25,12 +25,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button button2=(Button) findViewById(R.id.button_2);
         Button button3=(Button) findViewById(R.id.button_3);
         Button button4=(Button) findViewById(R.id.button_4);
+        Button button5=(Button) findViewById(R.id.button_5);
         editText =(EditText) findViewById(R.id.edit_text);
         imageView=(ImageView)findViewById(R.id.image_view);
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
+        button5.setOnClickListener(this);
         /*button2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -82,6 +84,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_4:
                 Intent intent4=new Intent(MainActivity.this,MessageActivity.class);
                 startActivity(intent4);
+                break;
+            case R.id.button_5:
+                Intent intent5=new Intent(MainActivity.this,NotificationTest.class);
+                startActivity(intent5);
                 break;
             default:
                 break;//

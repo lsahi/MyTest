@@ -32,7 +32,7 @@
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
-        android:layout_height="285dp"
+        android:layout_height="237dp"
         android:src="@drawable/img_1" />
 
     <Button

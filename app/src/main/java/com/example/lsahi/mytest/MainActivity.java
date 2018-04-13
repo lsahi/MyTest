@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button button3=(Button) findViewById(R.id.button_3);
         Button button4=(Button) findViewById(R.id.button_4);
         Button button5=(Button) findViewById(R.id.button_5);
+        Button button6=(Button) findViewById(R.id.button_6);
 
         editText =(EditText) findViewById(R.id.edit_text);
         imageView=(ImageView)findViewById(R.id.image_view);
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
         button5.setOnClickListener(this);
+        button6.setOnClickListener(this);
         /*button2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -96,6 +98,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_5:
                 Intent intent5=new Intent(MainActivity.this,NotificationTest.class);
                 startActivity(intent5);
+                break;
+            case R.id.button_6:
+                Intent intent6=new Intent(MainActivity.this,WebActivity.class);
+                startActivity(intent6);
                 break;
             default:
                 break;//

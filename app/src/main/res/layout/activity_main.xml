@@ -76,6 +76,12 @@
                 android:layout_height="wrap_content"
                 android:text="Notification"
                 android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/button_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Web"
+                android:textAllCaps="false"/>
 
         </LinearLayout>
     </ScrollView>

@@ -7,12 +7,12 @@
     android:orientation="vertical">-->
 
     <!--tools:context="com.example.lsahi.mytest.MainActivity"-->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     >
 
     <ScrollView
@@ -85,4 +85,18 @@
 
         </LinearLayout>
     </ScrollView>
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start">
+        <TextView
+            android:id="@+id/drawer_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="This is a drawerTextView"
+            android:textColor="#00ff00"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+</android.support.v4.widget.DrawerLayout>

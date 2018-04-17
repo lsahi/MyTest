@@ -82,15 +82,37 @@
                 android:layout_height="wrap_content"
                 android:text="Web"
                 android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/button_7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="position"
+                android:textAllCaps="false"/>
 
         </LinearLayout>
     </ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start">
+        android:background="#d8e0ef"
+        android:layout_gravity="left">
         <TextView
             android:id="@+id/drawer_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="This is a drawerTextView"
+            android:textColor="#00ff00"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#d8e0ef"
+        android:layout_gravity="right">
+        <TextView
+            android:id="@+id/drawer_text_view_R"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

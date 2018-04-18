@@ -6,6 +6,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,24 +15,37 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.MapView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PositionActivity extends AppCompatActivity {
+public class PositionActivity extends AppCompatActivity implements View.OnClickListener{
 
     public LocationClient mLocationClient;
 
     private TextView positionText;
 
+    private MapView mapView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mLocationClient=new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(new MyLocationListener());
+        SDKInitializer.initialize(getApplicationContext());
+
         setContentView(R.layout.activity_position);
+
+        Button buttonRefresh=(Button) findViewById(R.id.button_refresh_position);
+        buttonRefresh.setOnClickListener(this);
         positionText=(TextView) findViewById(R.id.position_text_view);
+        mapView=(MapView) findViewById(R.id.bmapView);
+
         List<String> permissionList=new ArrayList<>();
+
         if (ContextCompat.checkSelfPermission(PositionActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
@@ -48,16 +63,28 @@ public class PositionActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_refresh_position:
+                mLocationClient.stop();
+                requestLocation();
+                break;
+            default:
+                break;
+        }
+    }
     private void requestLocation(){
-
         initLocation();
         mLocationClient.start();
     }
 
     private void initLocation(){
         LocationClientOption option=new LocationClientOption();
-        option.setScanSpan(10000);
+
+        //option.setScanSpan(6000);
         option.setIsNeedAddress(true);
+
         //Using GPS *ONLY*
         //option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors);
         mLocationClient.setLocOption(option);

@@ -15,110 +15,112 @@
     android:layout_height="match_parent"
     >
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scrollbars="none" >
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:visibility="visible"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        </android.support.design.widget.AppBarLayout>
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
 
-            <TextView
-                android:id="@+id/text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="This is a TextView"
-                android:textColor="#00ff00"
-                android:textSize="24sp" />
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <Button
-                android:id="@+id/button_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="换老婆"
-                android:textAllCaps="false"/>
+                <TextView
+                    android:id="@+id/text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="This is a TextView"
+                    android:textColor="#00ff00"
+                    android:textSize="24sp" />
+                <EditText
+                    android:id="@+id/edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Type something here" />
 
-            <EditText
-                android:id="@+id/edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Type something here"/>
+                <Button
+                    android:id="@+id/button_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="换老婆"
+                    android:textAllCaps="false" />
 
-            <ImageView
-                android:id="@+id/image_view"
-                android:layout_width="match_parent"
-                android:layout_height="380dp"
-                android:src="@drawable/img_1" />
-            <Button
-                android:id="@+id/button_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RecyclerView Test"
-                android:textAllCaps="false" />
-            <Button
-                android:id="@+id/button_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Broadcast"
-                android:textAllCaps="false"/>
-            <Button
-                android:id="@+id/button_4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="MsgTest"
-                android:textAllCaps="false"/>
-            <Button
-                android:id="@+id/button_5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Notification"
-                android:textAllCaps="false"/>
-            <Button
-                android:id="@+id/button_6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Web"
-                android:textAllCaps="false"/>
-            <Button
-                android:id="@+id/button_7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="position"
-                android:textAllCaps="false"/>
 
-        </LinearLayout>
-    </ScrollView>
-    <LinearLayout
+                <ImageView
+                    android:id="@+id/image_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="380dp"
+                    android:src="@drawable/img_1" />
+
+                <Button
+                    android:id="@+id/button_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="RecyclerView Test"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/button_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Broadcast"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/button_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MsgTest"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/button_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Notification"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/button_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Web"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/button_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="position"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+        </ScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#d8e0ef"
-        android:layout_gravity="left">
-        <TextView
-            android:id="@+id/drawer_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="This is a drawerTextView"
-            android:textColor="#00ff00"
-            android:textSize="24sp" />
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu"
+        app:headerLayout="@layout/nav_header"/>
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#d8e0ef"
-        android:layout_gravity="right">
-        <TextView
-            android:id="@+id/drawer_text_view_R"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="This is a drawerTextView"
-            android:textColor="#00ff00"
-            android:textSize="24sp" />
-
-    </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

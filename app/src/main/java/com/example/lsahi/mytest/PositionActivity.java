@@ -116,10 +116,10 @@ public class PositionActivity extends AppCompatActivity implements View.OnClickL
 
     private void navigateTo(BDLocation location){
         if(isFirstLocate){
-            LatLng ll=new LatLng(location.getLatitude(),location.getLongitude());
+            LatLng ll=new LatLng(43.82,125.27);//(location.getLatitude(),location.getLongitude());
             MapStatusUpdate update= MapStatusUpdateFactory.newLatLng(ll);
             baiduMap.animateMapStatus(update);
-            update=MapStatusUpdateFactory.zoomTo(16f);
+            update=MapStatusUpdateFactory.zoomTo(12.5f);
             baiduMap.animateMapStatus(update);
             isFirstLocate=false;
         }
@@ -174,13 +174,12 @@ public class PositionActivity extends AppCompatActivity implements View.OnClickL
             currentPosition.append("定位方式: ");
             if(location.getLocType()==BDLocation.TypeGpsLocation){
                 currentPosition.append("GPS");
+                navigateTo(location);
             }else if(location.getLocType()==BDLocation.TypeNetWorkLocation){
                 currentPosition.append("NETWORK");
-            }
-            positionText.setText(currentPosition);
-            if(location.getLocType()==BDLocation.TypeGpsLocation||location.getLocType()==BDLocation.TypeNetWorkLocation){
                 navigateTo(location);
             }
+            positionText.setText(currentPosition);
         }
     }
 /*

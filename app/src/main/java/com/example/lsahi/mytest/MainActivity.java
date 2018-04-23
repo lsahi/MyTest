@@ -3,6 +3,7 @@ package com.example.lsahi.mytest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -36,13 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDrawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView=(NavigationView) findViewById(R.id.nav_view);
         ActionBar actionBar=getSupportActionBar();
-
         if(actionBar!=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ls_menu);
         }
-        navView.setCheckedItem(R.id.nav_call);
-        navView.setOnClickListener(this);
+        //navView.setCheckedItem(R.id.nav_call);
+        //navView.setOnClickListener(this);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(MenuItem item){
@@ -79,6 +79,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });*/
     }
+
+    //home menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                break;
+            default:
+                break;
+
+        }
+        return true;
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

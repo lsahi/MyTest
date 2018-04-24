@@ -46,7 +46,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
             @Override
             public boolean onNavigationItemSelected(MenuItem item){
-                mDrawerLayout.closeDrawers();
+                switch(item.getItemId()){
+                    case R.id.nav_profile:
+                        Intent intentLogin=new Intent(MainActivity.this,LoginActivity.class);
+                        startActivity(intentLogin);
+                        break;
+                    default:
+                        mDrawerLayout.closeDrawers();
+                }
                 return true;
             }
         });

@@ -61,11 +61,11 @@
 
         <activity
             android:name=".LoginActivity"
-            android:label="登陆"/>
+            android:label="登陆" />
         <activity
             android:name=".SignupActivity"
-            android:label="注册"
-            />
+            android:label="注册" />
+        <activity android:name=".TestSchoolActivity"></activity>
     </application>
 
 </manifest>

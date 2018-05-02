@@ -2,6 +2,8 @@ package com.example.lsahi.mytest;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editText;
     private ImageView imageView;
     private DrawerLayout mDrawerLayout;
+    public int loginstatus = 0;
+
 
     //private ScrollView scrollView = null;
     private int buttonCount=0;

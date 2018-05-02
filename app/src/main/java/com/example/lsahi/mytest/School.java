@@ -23,4 +23,8 @@ public class School {
         return activityName;
     }
 
+    public int getActivityId(){
+        return activityId;
+    }
+
 }

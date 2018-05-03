@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.button_2:
-                Intent intent2=new Intent(MainActivity.this, RecyclerViewActivity.class);
+                Intent intent2=new Intent(MainActivity.this, TestSchoolActivity.class);
                 startActivity(intent2);
                 break;
 

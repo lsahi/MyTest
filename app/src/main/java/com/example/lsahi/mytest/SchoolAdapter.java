@@ -32,8 +32,8 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.ViewHolder
             super(view);
             cardView=(CardView) view;
             schoolImage=(ImageView) view.findViewById(R.id.schoolImage);
-            schoolName=(TextView) view.findViewById(R.id.schoolName);
-            schoolActivityName=(TextView) view.findViewById(R.id.schoolActivityName)
+            schoolName=(TextView) view.findViewById(R.id.schoolUserName);
+            schoolActivityName=(TextView) view.findViewById(R.id.schoolActivityName);
         }
     }
 
@@ -47,14 +47,15 @@ public class SchoolAdapter extends RecyclerView.Adapter<SchoolAdapter.ViewHolder
             mContext=parent.getContext();
         }
         View view=LayoutInflater.from(mContext).inflate(R.layout.school_item,parent,false);
-        return  new ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder,int position){
         School school=mSchoolList.get(position);
-        holder.schoolName.setText(school.getActivityName());
-        Glide.with(mContext).load(school.getActivityId()).into(holder.schoolImage);
+        holder.schoolName.setText(school.getUserName());
+        holder.schoolActivityName.setText(school.getActivityName());
+        Glide.with(mContext).load(school.getActivityImageId()).into(holder.schoolImage);
     }
 
     @Override

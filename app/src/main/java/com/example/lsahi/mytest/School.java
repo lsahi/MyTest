@@ -7,24 +7,27 @@ package com.example.lsahi.mytest;
 public class School {
     private String userName;
     private String activityName;
-    private int activityId;
+    private int activityImageId;
 
-    public School(String userName, String activityName, int activityId){
+    public School(String userName, String activityName, int activityImageId){
         this.userName=userName;
         this.activityName=activityName;
-        this.activityId=activityId;
+        this.activityImageId=activityImageId;
     }
 
     public String getUserName(){
+
         return userName;
     }
 
     public String getActivityName(){
+
         return activityName;
     }
 
-    public int getActivityId(){
-        return activityId;
+    public int getActivityImageId(){
+
+        return activityImageId;
     }
 
 }

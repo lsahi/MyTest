@@ -65,7 +65,8 @@
         <activity
             android:name=".SignupActivity"
             android:label="注册" />
-        <activity android:name=".TestSchoolActivity"></activity>
+        <activity android:name=".TestSchoolActivity" />
+        <activity android:name=".ShowSchoolActivity"></activity>
     </application>
 
 </manifest>

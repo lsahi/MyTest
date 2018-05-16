@@ -1,12 +1,15 @@
 package com.example.lsahi.mytest;
 
+import android.graphics.Bitmap;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.telecom.Call;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,11 +43,21 @@ public class TestSchoolActivity extends AppCompatActivity {
     private List<School> schoolList=new ArrayList<>();
 
     private SchoolAdapter adapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_school);
         initSchools();
+
+        ActionBar actionBar=getSupportActionBar();
+        /*
+        if(actionBar!=null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ls_menu);
+        }*/
+
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.school_recycler_view);
         GridLayoutManager layoutManager=new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(layoutManager);
@@ -91,4 +104,23 @@ public class TestSchoolActivity extends AppCompatActivity {
             schoolList.add(schools[index]);
         }
     }
+
+/*
+    private void setCardIamge(){
+        String url = "http://img.my.csdn.net/uploads/201407/26/1406383291_8239.jpg";
+        OkHttpUtils.get().url(url).tag(this)
+                .build()
+                .connTimeOut(20000).readTimeOut(20000).writeTimeOut(20000)
+                .execute(new BitmapCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                    }
+
+                    @Override
+                    public void onResponse(Bitmap bitmap, int id) {
+                        imageView.setImageBitmap(bitmap);
+                    }
+                });
+    }
+    */
 }

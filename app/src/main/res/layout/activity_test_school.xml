@@ -31,9 +31,13 @@
                 android:visibility="visible"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_scrollFlags="scroll|enterAlways|snap">
+
+                    <!--menu button here-->
+
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textColor="#000000"
                         android:background="#FFFFFF"
                         android:drawablePadding="15dp"
                         android:drawableRight="@android:drawable/ic_menu_search"

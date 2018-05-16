@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/linear_border">
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,5 +12,4 @@
         android:layout_marginTop="15dp"
         android:background="@null"
         />
-
 </LinearLayout>

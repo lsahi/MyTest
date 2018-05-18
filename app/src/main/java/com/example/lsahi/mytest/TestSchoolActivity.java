@@ -38,7 +38,8 @@ public class TestSchoolActivity extends AppCompatActivity {
             new School("yuudachi","Kancolle",R.drawable.yuudachi),
             new School("shigure","Kancolle",R.drawable.shigure),
             new School("eugen","Kancolle",R.drawable.eugen),
-            new School("bismarck","Kancolle",R.drawable.bismarck)
+            new School("bismarck","Kancolle",R.drawable.bismarck),
+            new School("lsahi","software",R.drawable.lsahi_temp)
     };
     private List<School> schoolList=new ArrayList<>();
 

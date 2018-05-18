@@ -7,12 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
-import android.support.v4.media.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +22,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class NotificationTest extends AppCompatActivity implements View.OnClickListener{
+public class UploadActivity extends AppCompatActivity implements View.OnClickListener{
 
     public static final int TAKE_PHOTO=1;
 
@@ -34,7 +32,7 @@ public class NotificationTest extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notification_test);
+        setContentView(R.layout.activity_upload);
         Button sendNotice=(Button) findViewById(R.id.send_notice);
         Button takePhoto=(Button) findViewById(R.id.take_photo);
         picture=(ImageView) findViewById(R.id.picture);
@@ -77,14 +75,14 @@ public class NotificationTest extends AppCompatActivity implements View.OnClickL
                 try{
                     if (outputImage.exists()){
                         outputImage.delete();
-                        Toast.makeText(NotificationTest.this,"function takePhoto",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UploadActivity.this,"function takePhoto",Toast.LENGTH_SHORT).show();
                     }
                     outputImage.createNewFile();
                 }catch (IOException e){
                     e.printStackTrace();
                 }
                 if (Build.VERSION.SDK_INT>=24){
-                    imageUri= FileProvider.getUriForFile(NotificationTest.this,"com.example.cameraalbumtest.fileprovider",outputImage);
+                    imageUri= FileProvider.getUriForFile(UploadActivity.this,"com.example.cameraalbumtest.fileprovider",outputImage);
                 }else{
                     imageUri=Uri.fromFile(outputImage);
                 }

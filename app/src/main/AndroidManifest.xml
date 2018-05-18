@@ -35,7 +35,7 @@
             android:label="@string/title_activity_broadcast"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RecyclerViewActivity" />
-        <activity android:name=".NotificationTest" />
+        <activity android:name=".UploadActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

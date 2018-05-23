@@ -22,11 +22,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            -->
+
         </activity>
         <activity android:name=".SecondActivity" />
         <activity android:name=".MessageActivity" />
@@ -65,8 +69,16 @@
         <activity
             android:name=".SignupActivity"
             android:label="注册" />
-        <activity android:name=".TestSchoolActivity" />
-        <activity android:name=".ShowSchoolActivity"></activity>
+        <activity android:name=".TestSchoolActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ShowSchoolActivity" />
+        <activity android:name=".AddActivity" />
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>

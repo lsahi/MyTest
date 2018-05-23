@@ -4,26 +4,27 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/ls_profile"
-            android:title="profile"/>
-
-        <item
             android:id="@+id/nav_login"
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="login"
+            android:title="登录"
             />
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ls_profile"
+            android:title="个人信息设置"/>
+
 
         <item
             android:id="@+id/nav_call"
             android:icon="@drawable/ls_call"
-            android:title="Call"/>
+            android:title="验证身份信息"/>
 
 
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ls_logout"
-            android:title="logout"/>
+            android:title="登出"/>
 
     </group>
 </menu>

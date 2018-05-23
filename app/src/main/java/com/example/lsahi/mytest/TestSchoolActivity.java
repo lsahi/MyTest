@@ -1,6 +1,9 @@
 package com.example.lsahi.mytest;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -10,20 +13,23 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telecom.Call;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import junit.framework.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TestSchoolActivity extends AppCompatActivity {
+public class TestSchoolActivity extends AppCompatActivity implements View.OnClickListener{
 
     private SwipeRefreshLayout swipeRefresh;
     private DrawerLayout mDrawerLayout;
     private School[] schools={
-            new School("akagi","Kancolle",R.drawable.akagi),
+           /* new School("akagi","Kancolle",R.drawable.akagi),
             new School("kaga","Kancolle",R.drawable.kaga),
             new School("shogaku","Kancolle",R.drawable.shogaku),
             new School("zuikaku","Kancolle",R.drawable.zuigaku),
@@ -38,8 +44,16 @@ public class TestSchoolActivity extends AppCompatActivity {
             new School("yuudachi","Kancolle",R.drawable.yuudachi),
             new School("shigure","Kancolle",R.drawable.shigure),
             new School("eugen","Kancolle",R.drawable.eugen),
-            new School("bismarck","Kancolle",R.drawable.bismarck),
-            new School("lsahi","software",R.drawable.lsahi_temp)
+            new School("bismarck","Kancolle",R.drawable.bismarck),*/
+            new School("lsahi","software",R.drawable.lsahi_temp),
+
+            new School("lsahi1","computer",R.drawable.lsahi1),
+            new School("lsahi1","steam",R.drawable.lsahi2),
+            new School("lsahi1","ubisoft",R.drawable.lsahi3),
+            new School("lsahi5","google",R.drawable.lsahi4),
+            new School("lsahi2","android",R.drawable.lsahi5),
+            new School("lsahi3","iphone",R.drawable.lsahi6),
+            new School("lsahi4","windows",R.drawable.lsahi7)
     };
     private List<School> schoolList=new ArrayList<>();
 
@@ -52,12 +66,37 @@ public class TestSchoolActivity extends AppCompatActivity {
         setContentView(R.layout.activity_test_school);
         initSchools();
 
+        mDrawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
+        NavigationView navView=(NavigationView) findViewById(R.id.nav_view);
         ActionBar actionBar=getSupportActionBar();
-        /*
         if(actionBar!=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ls_menu);
-        }*/
+        }
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item){
+                switch(item.getItemId()){
+                    case R.id.nav_login:
+                        Intent intentLogin=new Intent(TestSchoolActivity.this,LoginActivity.class);
+                        startActivity(intentLogin);
+                        break;
+                    case R.id.nav_profile:
+                        break;
+                    case R.id.nav_call:
+                        break;
+                    case R.id.nav_logout:
+                        break;
+                    default:
+                        mDrawerLayout.closeDrawers();
+                }
+                return true;
+            }
+        });
+
+        FloatingActionButton add=(FloatingActionButton)findViewById(R.id.add);
+        add.setOnClickListener(this);
+
 
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.school_recycler_view);
         GridLayoutManager layoutManager=new GridLayoutManager(this,1);
@@ -72,6 +111,18 @@ public class TestSchoolActivity extends AppCompatActivity {
                 refreshSchools();
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.add:
+                Intent intent2=new Intent(TestSchoolActivity.this, AddActivity.class);
+                startActivity(intent2);
+                break;
+            default:
+                break;
+        }
     }
 
     private void refreshSchools(){

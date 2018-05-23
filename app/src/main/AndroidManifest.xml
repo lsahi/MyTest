@@ -52,7 +52,7 @@
         </provider>
 
         <activity android:name=".WebActivity" />
-        <activity android:name=".PositionActivity" />
+        <activity android:name=".UploadPositionActivity" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

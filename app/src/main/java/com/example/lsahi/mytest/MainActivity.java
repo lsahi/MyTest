@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent6);
                 break;
             case R.id.button_7:
-                Intent intent7=new Intent(MainActivity.this,PositionActivity.class);
+                Intent intent7=new Intent(MainActivity.this,UploadPositionActivity.class);
                 startActivity(intent7);
                 break;
             default:

@@ -1,6 +1,7 @@
 package com.example.lsahi.mytest;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import junit.framework.Test;
 
@@ -59,7 +61,6 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
 
     private SchoolAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,14 +79,25 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
             public boolean onNavigationItemSelected(MenuItem item){
                 switch(item.getItemId()){
                     case R.id.nav_login:
+                        if(loginStatusCheck()==1){
+                            Toast.makeText(TestSchoolActivity.this,"您已登陆，无需再次登录",Toast.LENGTH_SHORT).show();
+                        }else{
+                            Intent intentLogin=new Intent(TestSchoolActivity.this,LoginActivity.class);
+                            startActivity(intentLogin);
+                        }
+                        /*
                         Intent intentLogin=new Intent(TestSchoolActivity.this,LoginActivity.class);
                         startActivity(intentLogin);
+                        */
                         break;
                     case R.id.nav_profile:
                         break;
-                    case R.id.nav_call:
+                    case R.id.nav_usercheck:
+                        Intent intentCheck=new Intent(TestSchoolActivity.this,UploadActivity.class);
+                        startActivity(intentCheck);
                         break;
                     case R.id.nav_logout:
+                        //pref.
                         break;
                     default:
                         mDrawerLayout.closeDrawers();
@@ -175,4 +187,11 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
                 });
     }
     */
+    public int loginStatusCheck(){
+        SharedPreferences pref=getSharedPreferences("localLogin",MODE_PRIVATE);
+        String name=pref.getString("name","");
+        int status=pref.getInt("status",0);
+        //status =1
+        return  status;
+    }
 }

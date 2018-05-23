@@ -16,7 +16,7 @@
 
 
         <item
-            android:id="@+id/nav_call"
+            android:id="@+id/nav_usercheck"
             android:icon="@drawable/ls_call"
             android:title="验证身份信息"/>
 

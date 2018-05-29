@@ -85,7 +85,9 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".ProfileActivity"/>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="修改个人信息"/>
     </application>
 
 </manifest>

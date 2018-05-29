@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lsahi.mytest.com.example.lsahi.tools.School;
-import com.example.lsahi.mytest.com.example.lsahi.tools.Student;
+import com.example.lsahi.mytest.com.example.lsahi.tools.SchoolItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,6 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
 
     private SwipeRefreshLayout swipeRefresh;
     private DrawerLayout mDrawerLayout;
-
 
     private School[] schools={
            /* new School("akagi","Kancolle",R.drawable.akagi),
@@ -51,19 +50,23 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
             new School("shigure","Kancolle",R.drawable.shigure),
             new School("eugen","Kancolle",R.drawable.eugen),
             new School("bismarck","Kancolle",R.drawable.bismarck),*/
-            new School("lsahi","software",R.drawable.lsahi_temp),
 
-            new School("lsahi1","computer",R.drawable.lsahi1),
-            new School("lsahi1","steam",R.drawable.lsahi2),
-            new School("lsahi1","ubisoft",R.drawable.lsahi3),
-            new School("lsahi5","google",R.drawable.lsahi4),
-            new School("lsahi2","android",R.drawable.lsahi5),
-            new School("lsahi3","iphone",R.drawable.lsahi6),
-            new School("lsahi4","windows",R.drawable.lsahi7)
+           //offline test here
+
+            new School("1","lsahi","software",R.drawable.lsahi_temp),
+            new School("2","lsahi1","computer",R.drawable.lsahi1),
+            new School("3","lsahi1","steam",R.drawable.lsahi2),
+            new School("4","lsahi1","ubisoft",R.drawable.lsahi3),
+            new School("5","lsahi5","google",R.drawable.lsahi4),
+            new School("6","lsahi2","android",R.drawable.lsahi5),
+            new School("7","lsahi3","iphone",R.drawable.lsahi6),
+            new School("8","lsahi4","windows",R.drawable.lsahi7)
     };
+
+
     private List<School> schoolList=new ArrayList<>();
 
-    private Student.SchoolAdapter adapter;
+    private SchoolItems.SchoolAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +125,7 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.school_recycler_view);
         GridLayoutManager layoutManager=new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new Student.SchoolAdapter(schoolList);
+        adapter = new SchoolItems.SchoolAdapter(schoolList);
         recyclerView.setAdapter(adapter);
         swipeRefresh=(SwipeRefreshLayout)findViewById(R.id.swipe_refresh);
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
@@ -159,6 +162,7 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void run() {
 
+                        //no change in internet
                         initSchools();
                         adapter.notifyDataSetChanged();
                         swipeRefresh.setRefreshing(false);
@@ -230,5 +234,8 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
         }).start();
     }
 
+    private void initSchool(){
+
+    }
 
 }

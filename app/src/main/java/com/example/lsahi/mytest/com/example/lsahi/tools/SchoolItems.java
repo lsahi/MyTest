@@ -20,7 +20,7 @@ import java.util.List;
  * Created by lsahi on 2018/5/29.
  */
 
-public class Student {
+public class SchoolItems {
 
     /**
      * Created by lsahi on 2018/3/30.
@@ -63,6 +63,7 @@ public class Student {
                     int position=holder.getAdapterPosition();
                     School school=mSchoolList.get(position);
                     Intent intent=new Intent(mContext,ShowSchoolActivity.class);
+                    intent.putExtra(ShowSchoolActivity.SCHOOL_ID,school.getActivityId());
                     intent.putExtra(ShowSchoolActivity.SCHOOL_NAME,school.getUserName());
                     intent.putExtra(ShowSchoolActivity.SCHOOL_IMAGE_ID,school.getActivityImageId());
                     mContext.startActivity(intent);

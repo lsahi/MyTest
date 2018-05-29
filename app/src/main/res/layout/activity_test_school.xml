@@ -65,8 +65,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:src="@drawable/ic_launcher_foreground"/>
+            android:layout_margin="18dp"
+            android:src="@drawable/ls_plus"/>
 
     </android.support.design.widget.CoordinatorLayout>
     <android.support.design.widget.NavigationView

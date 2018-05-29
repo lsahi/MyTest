@@ -5,14 +5,21 @@ package com.example.lsahi.mytest.com.example.lsahi.tools;
  */
 
 public class School {
+
+    private String activityId;
     private String userName;
     private String activityName;
     private int activityImageId;
 
-    public School(String userName, String activityName, int activityImageId){
+    public School(String activityId, String userName, String activityName, int activityImageId){
+        this.activityId=activityId;
         this.userName=userName;
         this.activityName=activityName;
         this.activityImageId=activityImageId;
+    }
+
+    public String getActivityId(){
+        return activityId;
     }
 
     public String getUserName(){

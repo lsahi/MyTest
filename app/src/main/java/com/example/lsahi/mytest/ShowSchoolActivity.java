@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 
 public class ShowSchoolActivity extends AppCompatActivity {
 
+    public static final String SCHOOL_ID="school_id";
     public static final String SCHOOL_NAME="school_name";
     public static final String SCHOOL_IMAGE_ID="school_image_id";
 
@@ -21,9 +22,12 @@ public class ShowSchoolActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_school);
+
         Intent intent=getIntent();
+        String schoolId=intent.getStringExtra(SCHOOL_ID);
         String schoolName=intent.getStringExtra(SCHOOL_NAME);
         int schoolImageId=intent.getIntExtra(SCHOOL_IMAGE_ID,0);
+
         Toolbar toolbar=(Toolbar) findViewById(R.id.ShowSchoolToolbar);
         CollapsingToolbarLayout collapsingToolbar=(CollapsingToolbarLayout)findViewById(R.id.ShowSchoolCollapsingToolbar);
         ImageView schoolImageView=(ImageView) findViewById(R.id.ShowSchoolImageView);
@@ -38,7 +42,6 @@ public class ShowSchoolActivity extends AppCompatActivity {
         Glide.with(this).load(schoolImageId).into(schoolImageView);
         String schoolContent=generateSchoolContent(schoolName);
         schoolContentText.setText(schoolContent);
-
         //
     }
 

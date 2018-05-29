@@ -33,6 +33,7 @@ public class ShowSchoolActivity extends AppCompatActivity {
         if(actionBar!=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
         collapsingToolbar.setTitle(schoolName);
         Glide.with(this).load(schoolImageId).into(schoolImageView);
         String schoolContent=generateSchoolContent(schoolName);

@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.lsahi.mytest.com.example.lsahi.tools.Msg;
+import com.example.lsahi.mytest.com.example.lsahi.tools.MsgAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 

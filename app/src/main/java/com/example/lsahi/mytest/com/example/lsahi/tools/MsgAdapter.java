@@ -1,4 +1,4 @@
-package com.example.lsahi.mytest;
+package com.example.lsahi.mytest.com.example.lsahi.tools;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.example.lsahi.mytest.R;
 
 import java.util.List;
 

@@ -27,7 +27,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:text="lsahi"
+        android:text="text"
         android:textColor="#FFF"
         android:textSize="20sp" />
 

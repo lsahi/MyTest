@@ -8,21 +8,21 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class SignupActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
-    private String address="http://49.140.122.169:8080/GuangyanAdmin/addStudent.jsp";
+    private String address="http://49.140.122.169:8080/GuangyanAdmin/updateStudent.jsp";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_profile);
         WebView webView=(WebView) findViewById(R.id.signup_view);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(address);
 
 
-        Toolbar toolbar=(Toolbar) findViewById(R.id.signup_toolbar);
+        Toolbar toolbar=(Toolbar) findViewById(R.id.profile_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar=getSupportActionBar();
         if(actionBar!=null){

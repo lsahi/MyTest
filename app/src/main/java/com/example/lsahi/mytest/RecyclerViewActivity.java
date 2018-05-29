@@ -2,12 +2,14 @@ package com.example.lsahi.mytest;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.lsahi.mytest.com.example.lsahi.tools.Fruit;
+import com.example.lsahi.mytest.com.example.lsahi.tools.FruitAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

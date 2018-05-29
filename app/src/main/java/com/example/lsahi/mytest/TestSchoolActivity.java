@@ -2,7 +2,8 @@ package com.example.lsahi.mytest;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -10,17 +11,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.telecom.Call;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import junit.framework.Test;
+import com.example.lsahi.mytest.com.example.lsahi.tools.School;
+import com.example.lsahi.mytest.com.example.lsahi.tools.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +27,13 @@ import java.util.Random;
 
 public class TestSchoolActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private String loggedName;
+    private TextView myname;
+
     private SwipeRefreshLayout swipeRefresh;
     private DrawerLayout mDrawerLayout;
+
+
     private School[] schools={
            /* new School("akagi","Kancolle",R.drawable.akagi),
             new School("kaga","Kancolle",R.drawable.kaga),
@@ -59,7 +63,7 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
     };
     private List<School> schoolList=new ArrayList<>();
 
-    private SchoolAdapter adapter;
+    private Student.SchoolAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,10 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
 
         mDrawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView=(NavigationView) findViewById(R.id.nav_view);
+        View headerLayout = navView.inflateHeaderView(R.layout.nav_header);
+        myname = (TextView) headerLayout.findViewById(R.id.username);
+        navHeaderChange();
+
         ActionBar actionBar=getSupportActionBar();
         if(actionBar!=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -91,6 +99,8 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
                         */
                         break;
                     case R.id.nav_profile:
+                        Intent intentProfile=new Intent(TestSchoolActivity.this,ProfileActivity.class);
+                        startActivity(intentProfile);
                         break;
                     case R.id.nav_usercheck:
                         Intent intentCheck=new Intent(TestSchoolActivity.this,UploadActivity.class);
@@ -109,11 +119,10 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
         FloatingActionButton add=(FloatingActionButton)findViewById(R.id.add);
         add.setOnClickListener(this);
 
-
         RecyclerView recyclerView=(RecyclerView) findViewById(R.id.school_recycler_view);
         GridLayoutManager layoutManager=new GridLayoutManager(this,1);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new SchoolAdapter(schoolList);
+        adapter = new Student.SchoolAdapter(schoolList);
         recyclerView.setAdapter(adapter);
         swipeRefresh=(SwipeRefreshLayout)findViewById(R.id.swipe_refresh);
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
@@ -187,11 +196,39 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
                 });
     }
     */
+
+// this loginChack also offers username
     public int loginStatusCheck(){
         SharedPreferences pref=getSharedPreferences("localLogin",MODE_PRIVATE);
         String name=pref.getString("name","");
         int status=pref.getInt("status",0);
         //status =1
-        return  status;
+        loggedName=name;
+        return status;
     }
+
+    //在handler中更新UI
+    private Handler mHandler = new Handler(){
+        public void handleMessage(Message msg) {
+            if(loggedName!=null) {
+                myname.setText(loggedName);
+            }else{
+                myname.setText("游客，请登录");
+            }
+        }
+    };
+
+    //change UI
+    private void navHeaderChange(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message message=new Message();
+                message.what=1;
+                mHandler.sendMessage(message);
+            }
+        }).start();
+    }
+
+
 }

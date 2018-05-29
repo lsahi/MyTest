@@ -78,7 +78,14 @@
         </activity>
         <activity android:name=".ShowSchoolActivity" />
         <activity android:name=".AddActivity" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity" />
+
+        <service
+            android:name=".com.example.lsahi.tools.LoginCheckService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".ProfileActivity"/>
     </application>
 
 </manifest>

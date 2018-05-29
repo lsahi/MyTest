@@ -1,4 +1,4 @@
-package com.example.lsahi.mytest;
+package com.example.lsahi.mytest.com.example.lsahi.tools;
 
 /**
  * Created by lsahi on 2018/3/30.

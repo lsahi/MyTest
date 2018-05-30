@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.lsahi.mytest.R;
+import com.example.lsahi.mytest.po.Fruit;
 
 import java.util.List;
 

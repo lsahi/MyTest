@@ -17,6 +17,9 @@ public class ShowSchoolActivity extends AppCompatActivity {
     public static final String SCHOOL_ID="school_id";
     public static final String SCHOOL_NAME="school_name";
     public static final String SCHOOL_IMAGE_ID="school_image_id";
+    public static final String SCHOOL_DETAILS="school_details";
+    public static final String SCHOOL_HOST="school_host";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class ShowSchoolActivity extends AppCompatActivity {
         Intent intent=getIntent();
         String schoolId=intent.getStringExtra(SCHOOL_ID);
         String schoolName=intent.getStringExtra(SCHOOL_NAME);
+        String schoolDetails=intent.getStringExtra(SCHOOL_DETAILS);
         int schoolImageId=intent.getIntExtra(SCHOOL_IMAGE_ID,0);
 
         Toolbar toolbar=(Toolbar) findViewById(R.id.ShowSchoolToolbar);
@@ -40,14 +44,14 @@ public class ShowSchoolActivity extends AppCompatActivity {
 
         collapsingToolbar.setTitle(schoolName);
         Glide.with(this).load(schoolImageId).into(schoolImageView);
-        String schoolContent=generateSchoolContent(schoolName);
+        String schoolContent=generateSchoolContent(schoolDetails);
         schoolContentText.setText(schoolContent);
         //
     }
 
-    private String generateSchoolContent(String schoolName){
+    private String generateSchoolContent(String schoolDetails){
         StringBuilder schoolContent=new StringBuilder();
-        schoolContent.append(schoolName);
+        schoolContent.append(schoolDetails);
         return schoolContent.toString();
     }
 

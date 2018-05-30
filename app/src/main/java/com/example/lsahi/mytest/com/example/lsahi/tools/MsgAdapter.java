@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.lsahi.mytest.R;
+import com.example.lsahi.mytest.po.Msg;
 
 import java.util.List;
 

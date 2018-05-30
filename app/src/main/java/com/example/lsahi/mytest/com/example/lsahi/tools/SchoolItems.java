@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.lsahi.mytest.R;
 import com.example.lsahi.mytest.ShowSchoolActivity;
+import com.example.lsahi.mytest.po.School;
 
 import java.util.List;
 
@@ -63,8 +64,10 @@ public class SchoolItems {
                     int position=holder.getAdapterPosition();
                     School school=mSchoolList.get(position);
                     Intent intent=new Intent(mContext,ShowSchoolActivity.class);
-                    intent.putExtra(ShowSchoolActivity.SCHOOL_ID,school.getActivityId());
-                    intent.putExtra(ShowSchoolActivity.SCHOOL_NAME,school.getUserName());
+                    intent.putExtra(ShowSchoolActivity.SCHOOL_ID,school.getId());
+                    intent.putExtra(ShowSchoolActivity.SCHOOL_NAME,school.getName());
+                    intent.putExtra(ShowSchoolActivity.SCHOOL_DETAILS,school.getDetails());
+                    intent.putExtra(ShowSchoolActivity.SCHOOL_HOST,school.getHost());
                     intent.putExtra(ShowSchoolActivity.SCHOOL_IMAGE_ID,school.getActivityImageId());
                     mContext.startActivity(intent);
                 }
@@ -78,8 +81,8 @@ public class SchoolItems {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             School school = mSchoolList.get(position);
-            holder.schoolName.setText(school.getUserName());
-            holder.schoolActivityName.setText(school.getActivityName());
+            holder.schoolName.setText(school.getHost());
+            holder.schoolActivityName.setText(school.getName());
             Glide.with(mContext).load(school.getActivityImageId()).into(holder.schoolImage);
         }
 

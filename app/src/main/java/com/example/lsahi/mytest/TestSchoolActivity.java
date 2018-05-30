@@ -18,12 +18,21 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.lsahi.mytest.com.example.lsahi.tools.School;
+import com.example.lsahi.mytest.po.School;
 import com.example.lsahi.mytest.com.example.lsahi.tools.SchoolItems;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class TestSchoolActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -32,6 +41,9 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
 
     private SwipeRefreshLayout swipeRefresh;
     private DrawerLayout mDrawerLayout;
+    private static int[] randImg={R.drawable.lsahi7,R.drawable.lsahi6,R.drawable.lsahi5,R.drawable.lsahi4,R.drawable.lsahi3,R.drawable.lsahi2,R.drawable.lsahi1,R.drawable.lsahi0};
+
+    private String showAllActivities="http://49.140.122.169:8080/GuangyanAdmin/showAllActivities.do";
 
     private School[] schools={
            /* new School("akagi","Kancolle",R.drawable.akagi),
@@ -52,16 +64,18 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
             new School("bismarck","Kancolle",R.drawable.bismarck),*/
 
            //offline test here
-
-            new School("1","lsahi","software",R.drawable.lsahi_temp),
-            new School("2","lsahi1","computer",R.drawable.lsahi1),
-            new School("3","lsahi1","steam",R.drawable.lsahi2),
-            new School("4","lsahi1","ubisoft",R.drawable.lsahi3),
-            new School("5","lsahi5","google",R.drawable.lsahi4),
-            new School("6","lsahi2","android",R.drawable.lsahi5),
-            new School("7","lsahi3","iphone",R.drawable.lsahi6),
-            new School("8","lsahi4","windows",R.drawable.lsahi7)
+            /*
+            new School("1","lsahi","software",randImg),
+            new School("2","lsahi1","computer",randImg),
+            new School("3","lsahi1","steam",randImg),
+            new School("4","lsahi1","ubisoft",randImg),
+            new School("5","lsahi5","google",randImg),
+            new School("6","lsahi2","android",randImg),
+            new School("7","lsahi3","iphone",randImg),
+            new School("8","lsahi4","windows",randImg)
+       */
     };
+
 
 
     private List<School> schoolList=new ArrayList<>();
@@ -175,31 +189,73 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
     // get from the Internet, refresh to get again
     private void initSchools(){
         schoolList.clear();
+
+        //
+        /**
+         * offline test
+         */
+        /*
         for(int i=0;i<50;i++){
             Random random=new Random();
             int index=random.nextInt(schools.length);
             schoolList.add(schools[index]);
         }
+        */
+
+        //
+        sendRequestWithOkhttp(showAllActivities);
+
     }
 
-/*
-    private void setCardIamge(){
-        String url = "http://img.my.csdn.net/uploads/201407/26/1406383291_8239.jpg";
-        OkHttpUtils.get().url(url).tag(this)
-                .build()
-                .connTimeOut(20000).readTimeOut(20000).writeTimeOut(20000)
-                .execute(new BitmapCallback() {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                    }
-
-                    @Override
-                    public void onResponse(Bitmap bitmap, int id) {
-                        imageView.setImageBitmap(bitmap);
-                    }
-                });
+    private void sendRequestWithOkhttp(final String myUrl){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    OkHttpClient client=new OkHttpClient();
+                    Request request=new Request.Builder()
+                            .url(myUrl)
+                            .build();
+                    Response response=client.newCall(request).execute();
+                    String responseData=response.body().string();
+                    jsonToList(responseData);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
-    */
+
+    private void jsonToList(String myJson){
+        /**
+         * 字符串转json对象
+         */
+        //Json的解析类对象
+        JsonParser parser = new JsonParser();
+        //将JSON的String 转成一个JsonArray对象
+        JsonArray jsonArray = parser.parse(myJson).getAsJsonArray();
+        Gson gson=new Gson();
+        for (JsonElement gotActivity : jsonArray){
+            School gotSchool=gson.fromJson(gotActivity, School.class);
+            Random rand = new Random();
+            int randNum = rand.nextInt(7);
+            gotSchool.setActivityImageId(randImg[randNum]);
+            schoolList.add(gotSchool);
+        }
+
+        //
+        /**
+         * 字符串直接转list
+         * 无法赋值图片id，暂弃用
+         */
+        /*
+        List<School> schoolList=gson.fromJson(myJson, new TypeToken<List<School>>(){}.getType());
+        for(int i = 0; i < schoolList.size() ; i++)
+        {
+            School s = schoolList.get(i);
+            System.out.println(s.toString());
+        }*/
+    }
 
 // this loginChack also offers username
     public int loginStatusCheck(){

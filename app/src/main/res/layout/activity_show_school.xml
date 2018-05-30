@@ -17,6 +17,8 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:background="#7e7e7e"
             app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
             <ImageView
                 android:id="@+id/ShowSchoolImageView"

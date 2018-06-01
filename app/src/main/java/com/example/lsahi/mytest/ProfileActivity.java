@@ -1,25 +1,36 @@
 package com.example.lsahi.mytest;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private String address="http://49.140.122.169:8080/GuangyanAdmin/updateStudent.jsp";
+    public static final String USER_NAME="user_name";
 
+    private String address="http://49.140.122.169:8080/GuangyanAdmin/updateStudent.jsp";
+    private String loggedUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        Intent intent=getIntent();
+        loggedUser=intent.getStringExtra(USER_NAME);
+
         WebView webView=(WebView) findViewById(R.id.signup_view);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(address);
+        String url=address+"?sname="+loggedUser;
+
+        Log.d("URL",url);
+        webView.loadUrl(url);
 
 
         Toolbar toolbar=(Toolbar) findViewById(R.id.profile_toolbar);

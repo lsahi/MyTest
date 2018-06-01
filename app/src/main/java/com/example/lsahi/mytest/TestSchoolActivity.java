@@ -18,8 +18,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lsahi.mytest.com.example.lsahi.tools.MyDatabaseHelper;
 import com.example.lsahi.mytest.po.School;
 import com.example.lsahi.mytest.com.example.lsahi.tools.SchoolItems;
+import com.example.lsahi.mytest.po.User;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -27,6 +29,7 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -43,10 +46,12 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
     private DrawerLayout mDrawerLayout;
     private static int[] randImg={R.drawable.lsahi7,R.drawable.lsahi6,R.drawable.lsahi5,R.drawable.lsahi4,R.drawable.lsahi3,R.drawable.lsahi2,R.drawable.lsahi1,R.drawable.lsahi0};
 
+    private User user;
+
     private String showAllActivities="http://49.140.122.169:8080/GuangyanAdmin/showAllActivities.do";
 
-    private School[] schools={
-           /* new School("akagi","Kancolle",R.drawable.akagi),
+    /*private School[] schools={
+            new School("akagi","Kancolle",R.drawable.akagi),
             new School("kaga","Kancolle",R.drawable.kaga),
             new School("shogaku","Kancolle",R.drawable.shogaku),
             new School("zuikaku","Kancolle",R.drawable.zuigaku),
@@ -73,8 +78,8 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
             new School("6","lsahi2","android",randImg),
             new School("7","lsahi3","iphone",randImg),
             new School("8","lsahi4","windows",randImg)
-       */
-    };
+
+    };*/
 
 
 
@@ -82,11 +87,19 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
 
     private SchoolItems.SchoolAdapter adapter;
 
+    private MyDatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_school);
         initSchools();
+
+        dbHelper=new MyDatabaseHelper(this,"user.db",null,1);
+        dbHelper.getWritableDatabase();
+
+        user=dbHelper.getUser(dbHelper.getWritableDatabase());
+        loggedName=user.getSname();
 
         mDrawerLayout=(DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navView=(NavigationView) findViewById(R.id.nav_view);
@@ -104,27 +117,43 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
             public boolean onNavigationItemSelected(MenuItem item){
                 switch(item.getItemId()){
                     case R.id.nav_login:
-                        if(loginStatusCheck()==1){
+                        if(dbHelper.inDatabase(dbHelper.getWritableDatabase())!=0){
                             Toast.makeText(TestSchoolActivity.this,"您已登陆，无需再次登录",Toast.LENGTH_SHORT).show();
                         }else{
                             Intent intentLogin=new Intent(TestSchoolActivity.this,LoginActivity.class);
                             startActivity(intentLogin);
                         }
-                        /*
-                        Intent intentLogin=new Intent(TestSchoolActivity.this,LoginActivity.class);
-                        startActivity(intentLogin);
-                        */
                         break;
                     case R.id.nav_profile:
-                        Intent intentProfile=new Intent(TestSchoolActivity.this,ProfileActivity.class);
-                        startActivity(intentProfile);
-                        break;
+                        if(dbHelper.inDatabase(dbHelper.getWritableDatabase())==0){
+                            Toast.makeText(TestSchoolActivity.this,"对不起，您尚未登录",Toast.LENGTH_SHORT).show();
+                            break;
+                        }else {
+                            Intent intentProfile = new Intent(TestSchoolActivity.this, ProfileActivity.class);
+                            intentProfile.putExtra(AddActivity.USER_NAME,loggedName);
+                            startActivity(intentProfile);
+                            break;
+                        }
                     case R.id.nav_usercheck:
-                        Intent intentCheck=new Intent(TestSchoolActivity.this,UploadActivity.class);
-                        startActivity(intentCheck);
-                        break;
+                        if(dbHelper.inDatabase(dbHelper.getWritableDatabase())==0){
+                            Toast.makeText(TestSchoolActivity.this,"对不起，您尚未登录",Toast.LENGTH_SHORT).show();
+                            break;
+                        }else {
+                            Intent intentCheck = new Intent(TestSchoolActivity.this, UploadActivity.class);
+                            intentCheck.putExtra(AddActivity.USER_NAME,loggedName);
+                            startActivity(intentCheck);
+                            break;
+                        }
                     case R.id.nav_logout:
                         //pref.
+                        if(dbHelper.inDatabase(dbHelper.getWritableDatabase())==0){
+                            Toast.makeText(TestSchoolActivity.this,"尚未登录",Toast.LENGTH_SHORT).show();
+                        }else{
+                            //delete
+                            dbHelper.clearDatabase(dbHelper.getWritableDatabase());
+                            navHeaderChange();
+                            Toast.makeText(TestSchoolActivity.this,"用户已离线，如需使用请再次登录",Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     default:
                         mDrawerLayout.closeDrawers();
@@ -155,20 +184,28 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.add:
-                Intent intent2=new Intent(TestSchoolActivity.this, AddActivity.class);
-                startActivity(intent2);
-                break;
+                if(dbHelper.inDatabase(dbHelper.getWritableDatabase())==0){
+                    Toast.makeText(TestSchoolActivity.this,"对不起，您尚未登录",Toast.LENGTH_SHORT).show();
+                    break;
+                }else {
+                    Intent intent2 = new Intent(TestSchoolActivity.this, AddActivity.class);
+                    intent2.putExtra(AddActivity.USER_NAME,loggedName);
+                    startActivity(intent2);
+                    break;
+                }
             default:
                 break;
         }
     }
 
     private void refreshSchools(){
-        new Thread(new Runnable(){
+
+        Toast.makeText(TestSchoolActivity.this,"正在刷新，请稍候...",Toast.LENGTH_SHORT).show();
+        /*new Thread(new Runnable(){
             @Override
             public  void run(){
                 try{
-                    Thread.sleep(2000);
+                    Thread.sleep(1300);
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }
@@ -177,19 +214,27 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
                     public void run() {
 
                         //no change in internet
-                        initSchools();
+                        refresh();
+
                         adapter.notifyDataSetChanged();
                         swipeRefresh.setRefreshing(false);
+
                     }
                 });
             }
         }).start();
+        */
+        refresh();
+
+        adapter.notifyDataSetChanged();
+        swipeRefresh.setRefreshing(false);
     }
 
     // get from the Internet, refresh to get again
     private void initSchools(){
         schoolList.clear();
 
+        sendRequestWithOkhttp(showAllActivities);
         //
         /**
          * offline test
@@ -203,8 +248,6 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
         */
 
         //
-        sendRequestWithOkhttp(showAllActivities);
-
     }
 
     private void sendRequestWithOkhttp(final String myUrl){
@@ -242,19 +285,6 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
             gotSchool.setActivityImageId(randImg[randNum]);
             schoolList.add(gotSchool);
         }
-
-        //
-        /**
-         * 字符串直接转list
-         * 无法赋值图片id，暂弃用
-         */
-        /*
-        List<School> schoolList=gson.fromJson(myJson, new TypeToken<List<School>>(){}.getType());
-        for(int i = 0; i < schoolList.size() ; i++)
-        {
-            School s = schoolList.get(i);
-            System.out.println(s.toString());
-        }*/
     }
 
 // this loginChack also offers username
@@ -270,10 +300,16 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
     //在handler中更新UI
     private Handler mHandler = new Handler(){
         public void handleMessage(Message msg) {
-            if(loggedName!=null) {
-                myname.setText(loggedName);
-            }else{
+
+            if((loggedName instanceof String)!=true) {
+                loggedName="";
                 myname.setText("游客，请登录");
+            }else{
+                if(loggedName.equals("")){
+                    myname.setText("游客，请登录");
+                }else {
+                    myname.setText(loggedName);
+                }
             }
         }
     };
@@ -290,8 +326,24 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
         }).start();
     }
 
-    private void initSchool(){
+    //在handler中更新UI
+    private Handler refreshHandler = new Handler(){
+        public void handleMessage(Message msg) {
 
+            initSchools();
+
+        }
+    };
+
+    //change UI
+    private void refresh(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message message=new Message();
+                message.what=1;
+                refreshHandler.sendMessage(message);
+            }
+        }).start();
     }
-
 }

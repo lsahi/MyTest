@@ -57,7 +57,6 @@ public class HttpUtil {
                 }
             }
         }).start();
-
     }
 
     public static void sendOkHttpRequest(String address, okhttp3.Callback callback){

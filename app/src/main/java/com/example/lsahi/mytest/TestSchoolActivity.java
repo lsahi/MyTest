@@ -2,6 +2,7 @@ package com.example.lsahi.mytest;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
@@ -13,8 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +47,9 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
     private String loggedName;
     private TextView myname;
 
+    private EditText searchBar;
+    private String keyword="";
+
     private SwipeRefreshLayout swipeRefresh;
     private DrawerLayout mDrawerLayout;
     private static int[] randImg={R.drawable.lsahi7,R.drawable.lsahi6,R.drawable.lsahi5,R.drawable.lsahi4,R.drawable.lsahi3,R.drawable.lsahi2,R.drawable.lsahi1,R.drawable.lsahi0};
@@ -49,6 +57,9 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
     private User user;
 
     private String showAllActivities="http://49.140.122.169:8080/GuangyanAdmin/showAllActivities.do";
+
+    private String showSelectedActivities="http://49.140.122.169:8080/GuangyanAdmin/showSelectedActivities.do";
+    private String url="";
 
     /*private School[] schools={
             new School("akagi","Kancolle",R.drawable.akagi),
@@ -89,11 +100,12 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
 
     private MyDatabaseHelper dbHelper;
 
+    private SearchView mSearchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_school);
-        initSchools();
+        initSchools(keyword);
 
         dbHelper=new MyDatabaseHelper(this,"user.db",null,1);
         dbHelper.getWritableDatabase();
@@ -106,6 +118,34 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
         View headerLayout = navView.inflateHeaderView(R.layout.nav_header);
         myname = (TextView) headerLayout.findViewById(R.id.username);
         navHeaderChange();
+
+        searchBar=(EditText) findViewById(R.id.searchbar);
+
+        //pic listener(?)
+        searchBar.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // et.getCompoundDrawables()得到一个长度为4的数组，分别表示左右上下四张图片
+                Drawable drawable = searchBar.getCompoundDrawables()[2];
+                //如果右边没有图片，不再处理
+                if (drawable == null)
+                    return false;
+                //如果不是按下事件，不再处理
+                if (event.getAction() != MotionEvent.ACTION_UP){
+                    return false;
+                }
+                if (event.getX() > searchBar.getWidth()
+                        - searchBar.getPaddingRight()
+                        - drawable.getIntrinsicWidth()){
+                    keyword=new String(searchBar.getText().toString());
+                    refreshSchools();
+                }
+                return false;
+            }
+
+        });
+
 
         ActionBar actionBar=getSupportActionBar();
         if(actionBar!=null){
@@ -134,12 +174,13 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
                             startActivity(intentProfile);
                             break;
                         }
+                    //goto usercheck mission
                     case R.id.nav_usercheck:
                         if(dbHelper.inDatabase(dbHelper.getWritableDatabase())==0){
                             Toast.makeText(TestSchoolActivity.this,"对不起，您尚未登录",Toast.LENGTH_SHORT).show();
                             break;
                         }else {
-                            Intent intentCheck = new Intent(TestSchoolActivity.this, UploadActivity.class);
+                            Intent intentCheck = new Intent(TestSchoolActivity.this, UploadPositionActivity.class);
                             intentCheck.putExtra(AddActivity.USER_NAME,loggedName);
                             startActivity(intentCheck);
                             break;
@@ -200,7 +241,7 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
 
     private void refreshSchools(){
 
-        Toast.makeText(TestSchoolActivity.this,"正在刷新，请稍候...",Toast.LENGTH_SHORT).show();
+        Toast.makeText(TestSchoolActivity.this,"正在向服务器请求数据，请稍候...如果时间过长请手动刷新一次",Toast.LENGTH_SHORT).show();
         /*new Thread(new Runnable(){
             @Override
             public  void run(){
@@ -231,10 +272,15 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
     }
 
     // get from the Internet, refresh to get again
-    private void initSchools(){
+    private void initSchools(String keyword){
         schoolList.clear();
 
-        sendRequestWithOkhttp(showAllActivities);
+        if(keyword.equals("")) {
+            sendRequestWithOkhttp(showAllActivities);
+        }else{
+            url=showSelectedActivities+"?keyword="+keyword;
+            sendRequestWithOkhttp(url);
+        }
         //
         /**
          * offline test
@@ -330,7 +376,7 @@ public class TestSchoolActivity extends AppCompatActivity implements View.OnClic
     private Handler refreshHandler = new Handler(){
         public void handleMessage(Message msg) {
 
-            initSchools();
+            initSchools(keyword);
 
         }
     };

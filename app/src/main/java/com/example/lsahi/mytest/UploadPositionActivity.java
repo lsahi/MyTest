@@ -79,7 +79,7 @@ public class UploadPositionActivity extends AppCompatActivity implements View.On
         positionText=(TextView) findViewById(R.id.position_text_view);
         //mapView=(MapView) findViewById(R.id.bmapView);
         //baiduMap=mapView.getMap();
-        baiduMap.setMyLocationEnabled(true);
+        //baiduMap.setMyLocationEnabled(true);
 
         List<String> permissionList=new ArrayList<>();
 
@@ -119,8 +119,8 @@ public class UploadPositionActivity extends AppCompatActivity implements View.On
                 PendingIntent pi=PendingIntent.getActivity(this,0,intent,0);
                 NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 Notification notification =new Notification.Builder(this)
-                        .setContentTitle("A Notification")
-                        .setContentText("Come and see your wife")
+                        .setContentTitle("验证已发送")
+                        .setContentText("请等待管理员的验证结果")
                         .setWhen(System.currentTimeMillis())
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setLargeIcon(BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher))
@@ -204,7 +204,7 @@ public class UploadPositionActivity extends AppCompatActivity implements View.On
         super.onDestroy();
         mLocationClient.stop();
         //mapView.onDestroy();
-        baiduMap.setMyLocationEnabled(false);
+        //baiduMap.setMyLocationEnabled(false);
     }
 
     @Override
@@ -233,21 +233,21 @@ public class UploadPositionActivity extends AppCompatActivity implements View.On
         @Override
         public void onReceiveLocation(BDLocation location){
             StringBuilder currentPosition = new StringBuilder();
-            currentPosition.append("纬度: ").append(location.getLatitude()).append("\n");
+            currentPosition.append("纬度: ").append(location.getLatitude()).append("，  ");
             currentPosition.append("经度: ").append(location.getLongitude()).append("\n");
-            currentPosition.append("国家: ").append(location.getCountry()).append("\n");
+            //currentPosition.append("国家: ").append(location.getCountry()).append("\n");
             currentPosition.append("省: ").append(location.getProvince()).append("\n");
             currentPosition.append("市: ").append(location.getCity()).append("\n");
             currentPosition.append("区: ").append(location.getDistrict()).append("\n");
-            currentPosition.append("街道 ").append(location.getStreet()).append("\n");
-            currentPosition.append("定位方式: ");
+            //currentPosition.append("街道 ").append(location.getStreet()).append("\n");
+            /*currentPosition.append("定位方式: ");
             if(location.getLocType()==BDLocation.TypeGpsLocation){
                 currentPosition.append("GPS");
                 navigateTo(location);
             }else if(location.getLocType()==BDLocation.TypeNetWorkLocation){
                 currentPosition.append("NETWORK");
-                navigateTo(location);
-            }
+                //navigateTo(location);
+            }*/
             positionText.setText(currentPosition);
             mPosition=currentPosition.toString();
         }

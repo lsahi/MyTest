@@ -35,16 +35,19 @@
                     <!--menu button here-->
 
                     <EditText
+                        android:id="@+id/searchbar"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="#000000"
                         android:background="#FFFFFF"
                         android:drawablePadding="15dp"
-                        android:drawableRight="@android:drawable/ic_menu_search"
+                        android:drawableRight="@drawable/ls_search"
                         android:gravity="left|center"
                         android:hint="输入以搜索"
                         android:padding="10dp"
-                        android:textColorHint="#c2494949" />
+                        android:textColorHint="#c2494949"
+                        android:imeOptions="actionSearch"/>
+
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>

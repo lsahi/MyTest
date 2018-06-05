@@ -7,17 +7,26 @@
     android:orientation="vertical"
     tools:context="com.example.lsahi.mytest.UploadPositionActivity">
 
+    <TextView
+        android:id="@+id/mission_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="\n当前任务:拍摄吉林大学北门照片"
+        android:textSize="20sp" />
     <Button
         android:id="@+id/button_refresh_position"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Refresh your position"
+        android:text="获取当前定位"
         android:textAllCaps="false"/>
     <TextView
         android:id="@+id/position_text_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:gravity="center"
+        android:text=""
+        android:textSize="20sp" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

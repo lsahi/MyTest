@@ -2,6 +2,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'lsahi'
+            keyPassword 'wbb19960402'
+            storeFile file('D:/Android/key.jks')
+            storePassword 'wbb19960402'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.lsahi.mytest"
@@ -15,6 +23,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     sourceSets {
@@ -43,5 +52,4 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile files('libs/BaiduLBS_Android.jar')
-
 }
